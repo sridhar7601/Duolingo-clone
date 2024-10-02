@@ -14,9 +14,9 @@ const App: React.FC = () => {
       <Router>
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-900">
           <Header />
-          <main className="flex-grow pb-16 md:pb-0">
+          <main className="flex-grow pb-16 md:pb-0 md:pl-16 lg:pl-64">
             <Routes>
-              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/" element={<Home />} />
               <Route path="/learn" element={<Learn />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
