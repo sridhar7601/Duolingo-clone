@@ -6,15 +6,14 @@ import Learn from './pages/Learn';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
-        <div className="flex flex-col md:flex-row min-h-screen bg-gray-900">
+        <div className="flex flex-col md:flex-row min-h-screen bg-[#0a0a0a]">
           <Header />
-          <main className="flex-grow pb-16 md:pb-0 md:pl-16 lg:pl-64">
+          <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/learn" element={<Learn />} />
@@ -23,7 +22,6 @@ const App: React.FC = () => {
               {/* Add routes for other pages as needed */}
             </Routes>
           </main>
-          <Footer />
         </div>
       </Router>
     </AuthProvider>
