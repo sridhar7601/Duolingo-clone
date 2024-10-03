@@ -81,7 +81,7 @@ const Header: React.FC = () => {
                   : "hover:bg-[rgb(var(--color-hover))]"
               }`}
             >
-              <img src={item.icon} alt={item.label} className="w-6 h-6" />
+              <img src={item.icon} alt={item.label} className="w-8 h-8" />
               <span 
                 className={`ml-3 text-sm font-semibold hidden lg:inline ${
                   location.pathname === item.path
