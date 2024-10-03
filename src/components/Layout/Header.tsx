@@ -11,9 +11,9 @@ const Header: React.FC = () => {
       path: "/learn",
     },
     {
-      icon: "https://d35aaqx5ub95lt.cloudfront.net/vendor/597da4049ec7b1ee932d1b95ca424e0d.svg",
-      label: "LETTER",
-      path: "/letter",
+      icon: "https://d35aaqx5ub95lt.cloudfront.net/vendor/3b4928101472fce4e9edac920c1b3817.svg",
+      label: "SOUNDS",
+      path: "/sounds",
     },
     {
       icon: "https://d35aaqx5ub95lt.cloudfront.net/vendor/ca9178510134b4b0893dbac30b6670aa.svg",
@@ -21,7 +21,7 @@ const Header: React.FC = () => {
       path: "/leaderboards",
     },
     {
-      icon: "https://d35aaqx5ub95lt.cloudfront.net/vendor/ca9178510134b4b0893dbac30b6670aa.svg",
+      icon: "https://d35aaqx5ub95lt.cloudfront.net/vendor/7ef36bae3f9d68fc763d3451b5167836.svg",
       label: "QUESTS",
       path: "/quests",
     },
@@ -44,60 +44,45 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <style jsx>{`
-        :root {
-          --color-blue-jay: 63, 133, 167;
-          --color-macaw: 73, 192, 248;
-          --color-wolf: 220, 230, 236;
-          --color-hover: 32, 47, 54;
-        }
-      `}</style>
-      {/* Header only visible on medium screens (md) and larger */}
-      <header className="hidden md:block border-r-2 border-[#37464f]">
-        <div className="lg:w-[163px] md:w-[80px] pr-0 pb-[46px] lg:pl-[34px] md:pl-[10px] pt-[32px] box-border h-[30px]">
-          {/* Default image for larger screens */}
+      {/* Header visible on medium screens (md) and larger */}
+      <header className="hidden md:flex flex-col h-screen w-[72px] xl:w-[256px] border-r-2 border-[#37464f] py-6">
+        <div className="mb-5 mt-2 px-4 xl:px-8">
           <img
-            src="https://d35aaqx5ub95lt.cloudfront.net/vendor/70a4be81077a8037698067f583816ff9.svg"
-            alt="duolingo"
-            className="hidden lg:block" // hidden on small screens, visible on large and larger
-          />
-
-          {/* Image for medium screens */}
-          <img
+            className="block xl:hidden"
+            alt="Duolingo Icon"
+            width={40}
+            height={40}
             src="https://d35aaqx5ub95lt.cloudfront.net/vendor/0cecd302cf0bcd0f73d51768feff75fe.svg"
-            alt="duolingo-small"
-            className="hidden md:block lg:hidden h-[40px] w-auto"
+          />
+          <img
+            className="hidden xl:block"
+            alt="Duolingo Logo"
+            width={128}
+            height={30}
+            src="https://d35aaqx5ub95lt.cloudfront.net/vendor/70a4be81077a8037698067f583816ff9.svg"
           />
         </div>
 
-        <div className="md:w-16 lg:w-64 md:min-h-screen md:flex flex-col items-center gap-1 py-4">
+        <nav className="flex flex-col space-y-3 pl-2 xl:pl-4 pr-2 xl:pr-4 pt-2">
           {navItems.map((item) => (
             <Link
               key={item.label}
               to={item.path}
-              className={`flex items-center w-full py-3 lg:px-4 rounded-lg md:justify-center lg:justify-start transition-colors ${
+              className={`flex items-center p-1 xl:pl-4 space-x-2 xl:space-x-5 rounded-[12px] font-din-round text-[#DCE6EC] hover:bg-[rgb(32,47,54)] transition-colors ${
                 location.pathname === item.path
-                  ? "border-2 border-solid border-[rgb(var(--color-blue-jay))]"
-                  : "hover:bg-[rgb(var(--color-hover))]"
+                  ? 'bg-[rgb(32,47,54)] border-[rgb(63,133,167)] border-2 text-[#49C0F8]'
+                  : 'border-transparent border-2'
               }`}
             >
-              <img src={item.icon} alt={item.label} className="w-8 h-8" />
-              <span 
-                className={`ml-3 text-sm font-semibold hidden lg:inline ${
-                  location.pathname === item.path
-                    ? "text-[rgb(var(--color-macaw))]"
-                    : "text-[rgb(var(--color-wolf))]"
-                }`}
-              >
-                {item.label}
-              </span>
+              <img src={item.icon} alt={`${item.label} Icon`} className="w-8 h-8" />
+              <span className="hidden xl:inline-block text-[15px]">{item.label}</span>
             </Link>
           ))}
-        </div>
+        </nav>
       </header>
 
       {/* Mobile bottom navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 p-2">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t-2 border-[#37464f] p-2">
         <div className="flex justify-around items-center">
           {navItems.map((item) => (
             <Link
@@ -105,11 +90,11 @@ const Header: React.FC = () => {
               to={item.path}
               className={`flex flex-col items-center p-2 ${
                 location.pathname === item.path
-                  ? "text-white"
-                  : "text-green-900"
+                  ? "text-[#49C0F8]"
+                  : "text-[#DCE6EC] opacity-70"
               }`}
             >
-              <img src={item.icon} alt={item.label} className="w-6 h-6" />
+              <img src={item.icon} alt={item.label} className="w-8 h-8" />
             </Link>
           ))}
         </div>
