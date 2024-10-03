@@ -53,7 +53,7 @@ const Header: React.FC = () => {
         }
       `}</style>
       {/* Header only visible on medium screens (md) and larger */}
-      <header className="hidden md:block border-r-[1px] border-white">
+      <header className="hidden md:block border-r-2 border-[#37464f]">
         <div className="lg:w-[163px] md:w-[80px] pr-0 pb-[46px] lg:pl-[34px] md:pl-[10px] pt-[32px] box-border h-[30px]">
           {/* Default image for larger screens */}
           <img
@@ -97,7 +97,7 @@ const Header: React.FC = () => {
       </header>
 
       {/* Mobile bottom navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-green-500 p-2">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 p-2">
         <div className="flex justify-around items-center">
           {navItems.map((item) => (
             <Link

@@ -85,11 +85,11 @@ const Learn: React.FC = () => {
           </main>
 
           {/* Right sidebar - hidden on mobile */}
-          <aside className="hidden md:block w-80 p-6 space-y-4">
-            <div className="bg-[#1f1f1f] rounded-2xl p-4">
+          <aside className="hidden md:block w-90 p-6 space-y-4">
+            <div className="border-2 border-[#37464f] rounded-2xl p-4 h-40">
               <h2 className="text-xl font-bold mb-2">Unlock Leaderboards!</h2>
               <div className="flex items-center">
-                <div className="bg-[#4b4b4b] rounded-full p-2 mr-3">
+                <div className="rounded-full p-2 mr-3">
                   <Lock size={20} className="text-white" />
                 </div>
                 <p className="text-sm">
@@ -98,7 +98,7 @@ const Learn: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-[#1f1f1f] rounded-2xl p-4">
+            <div className="border-2 border-[#37464f] rounded-2xl p-4 h-40">
               <div className="flex justify-between items-center mb-2">
                 <h2 className="text-xl font-bold">Daily Quests</h2>
                 <button className="text-[#afafaf] text-sm font-bold flex items-center">
@@ -116,27 +116,27 @@ const Learn: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-[#1f1f1f] rounded-2xl p-4 space-y-3">
+            <div className="border-2 border-[#37464f] rounded-2xl p-4 space-y-3">
               <h2 className="text-xl font-bold">
-                Create a profile to save your progress!
+              Create a profile to save your progress!
               </h2>
               <button
-                onClick={() => openAuthModal("signup")}
-                className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
-                shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
-                active:shadow-none active:translate-y-[5px]
-                transition-all duration-150 ease-in-out"
+              onClick={() => openAuthModal("signup")}
+              className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
+              shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
+              active:shadow-none active:translate-y-[5px]
+              transition-all duration-150 ease-in-out"
               >
-                CREATE A PROFILE
+              CREATE A PROFILE
               </button>
               <button
-                onClick={() => openAuthModal("login")}
-                className="w-full bg-[#1cb0f6] text-white font-bold py-3 px-6 rounded-2xl
-                shadow-[0_5px_0_#1899d6] hover:bg-[#1cb0f6]/90
-                active:shadow-none active:translate-y-[5px]
-                transition-all duration-150 ease-in-out"
+              onClick={() => openAuthModal("login")}
+              className="w-full bg-[#1cb0f6] text-white font-bold py-3 px-6 rounded-2xl
+              shadow-[0_5px_0_#1899d6] hover:bg-[#1cb0f6]/90
+              active:shadow-none active:translate-y-[5px]
+              transition-all duration-150 ease-in-out"
               >
-                SIGN IN
+              SIGN IN
               </button>
             </div>
           </aside>

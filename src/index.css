@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background-color: rgb(17, 24, 39);
+  body {
+    background-color: rgb(19, 31, 36); /* or any valid color value */
     font-family: Arial, sans-serif;
   }
   
