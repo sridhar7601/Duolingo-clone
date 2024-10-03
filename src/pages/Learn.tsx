@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Star, ChevronRight, Lock, Zap, Flag, Plus, Flame } from "lucide-react";
 import AuthModal from "../components/Auth/AuthModal";
-// import Header from "../components/Layout/Header";
 
 const Learn: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -18,33 +17,47 @@ const Learn: React.FC = () => {
   };
 
   return (
-    <div className="flex bg-[#0a0a0a] text-white min-h-screen">
-      {/* <Header /> */}
+    // bg-[#0a0a0a]
+    <div className="flex  text-white min-h-screen">
       <div className="flex-1 flex flex-col">
-        {/* Top icons */}
-        <div className="flex justify-end p-4 space-x-4">
+        {/* Mobile top icons */}
+        <div className="md:hidden flex justify-between items-center p-4">
+          <TopIcon icon="🇩🇪" label="German" />
+          <div className="flex space-x-4">
+            <TopIcon icon="🔥" label="1" />
+            <TopIcon icon="💎" label="505" />
+            <TopIcon icon="❤️" label="5" />
+          </div>
+        </div>
+
+        {/* Desktop top icons */}
+        <div className="hidden md:flex justify-end p-4 space-x-4">
           <TopIcon icon={<Flag className="text-[#ce82ff]" size={20} />} label="German" dropdown="courses" />
           <TopIcon icon={<Flame className="text-[#ff9600]" size={20} />} label="1" dropdown="streak" />
           <TopIcon icon={<span className="text-xs">💎</span>} label="505" dropdown="gems" />
           <TopIcon icon={<span className="text-xs">❤️</span>} label="5" dropdown="hearts" />
         </div>
 
-        <div className="flex-1 flex">
+        <div className="flex-1 flex flex-col md:flex-row">
           {/* Main content */}
-          <main className="flex-1 p-6">
+          <main className="flex-1 p-4 md:p-6">
             <header className="bg-[#58cc02] rounded-2xl p-4 mb-8 flex justify-between items-center">
               <div>
                 <p className="text-xs font-bold mb-1">SECTION 1, UNIT 1</p>
                 <h1 className="text-2xl font-bold">Order in a cafe</h1>
               </div>
               <button className="bg-white text-[#58cc02] font-bold py-2 px-4 rounded-xl text-sm">
-                GUIDEBOOK
+                <span className="hidden md:inline">GUIDEBOOK</span>
+                <Zap size={20} className="md:hidden" />
               </button>
             </header>
 
             <div className="flex flex-col items-center space-y-4 mb-8">
-              <button className="bg-[#58cc02] text-white font-bold p-4 rounded-full">
+              <button className="relative bg-[#58cc02] text-white font-bold p-4 rounded-full">
                 <Star size={32} />
+                <div className="md:hidden absolute -top-2 -right-2 bg-[#1cb0f6] text-white text-xs font-bold px-2 py-1 rounded-full">
+                  START
+                </div>
               </button>
               {[1, 2].map((_, index) => (
                 <div
@@ -61,7 +74,7 @@ const Learn: React.FC = () => {
                   className="w-12 h-12"
                 />
               </div>
-              <div className="w-16 h-16 bg-[#2b2b2b] rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-[#2b2b2b] rounded-full flex items-center justify-center md:static absolute bottom-24 right-8">
                 <img
                   src="https://d35aaqx5ub95lt.cloudfront.net/images/owlHappy.svg"
                   alt="Duolingo Owl"
@@ -71,8 +84,8 @@ const Learn: React.FC = () => {
             </div>
           </main>
 
-          {/* Right sidebar */}
-          <aside className="w-80 p-6 space-y-4">
+          {/* Right sidebar - hidden on mobile */}
+          <aside className="hidden md:block w-80 p-6 space-y-4">
             <div className="bg-[#1f1f1f] rounded-2xl p-4">
               <h2 className="text-xl font-bold mb-2">Unlock Leaderboards!</h2>
               <div className="flex items-center">
@@ -139,21 +152,21 @@ const Learn: React.FC = () => {
   );
 };
 
-const TopIcon: React.FC<{ icon: React.ReactNode; label: string; dropdown: string }> = ({ icon, label, dropdown }) => {
+const TopIcon: React.FC<{ icon: React.ReactNode; label: string; dropdown?: string }> = ({ icon, label, dropdown }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="relative">
       <button 
         className="flex items-center bg-[#1f1f1f] rounded-full px-3 py-1"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => dropdown && setIsOpen(!isOpen)}
       >
         <div className="w-5 h-5 bg-[#1cb0f6] rounded-full flex items-center justify-center mr-2">
           {icon}
         </div>
         <span>{label}</span>
       </button>
-      {isOpen && (
+      {dropdown && isOpen && (
         <div className="absolute top-full right-0 mt-2 w-64 bg-[#1f1f1f] rounded-lg shadow-lg p-4">
           {/* Dropdown content here */}
         </div>

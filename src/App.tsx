@@ -11,7 +11,8 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
-        <div className="flex flex-col md:flex-row min-h-screen bg-[#0a0a0a]">
+      {/* bg-[#0a0a0a] */}
+        <div className="flex flex-col md:flex-row min-h-screen ">
           <Header />
           <main className="flex-grow">
             <Routes>
@@ -20,7 +21,7 @@ const App: React.FC = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               {/* Add routes for other pages as needed */}
-            </Routes>
+            </Routes> ``
           </main>
         </div>
       </Router>
