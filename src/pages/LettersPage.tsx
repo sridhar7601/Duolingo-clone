@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Star, ChevronRight, Lock, Zap, Flag, Flame } from "lucide-react";
 import AuthModal from "../components/Auth/AuthModal";
 
-const Learn: React.FC = () => {
+const LettersPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
   const [showTooltip, setShowTooltip] = useState(false);
@@ -14,35 +14,45 @@ const Learn: React.FC = () => {
     setIsAuthModalOpen(true);
   };
 
-  const navItems = [
-    {
-      icon: "🇩🇪",
-      label: "German",
-      path: "/learn",
-    },
-    {
-      icon: "🔥",
-      label: "1",
-      path: "/streak",
-    },
-    {
-      icon: "💎",
-      label: "505",
-      path: "/gems",
-    },
-    {
-      icon: "❤️",
-      label: "5",
-      path: "/hearts",
-    },
+  const hindiLetters = [
+    { letter: 'क', romanized: 'ka' },
+    { letter: 'ख', romanized: 'kha' },
+    { letter: 'ग', romanized: 'ga' },
+    { letter: 'घ', romanized: 'gha' },
+    { letter: 'च', romanized: 'ca' },
+    { letter: 'छ', romanized: 'cha' },
+    { letter: 'ज', romanized: 'ja' },
+    { letter: 'झ', romanized: 'jha' },
+    { letter: 'ट', romanized: 'Ta' },
+    { letter: 'ठ', romanized: 'Tha' },
+    { letter: 'ड', romanized: 'Da' },
+    { letter: 'ढ', romanized: 'Dha' },
+    { letter: 'त', romanized: 'ta' },
+    { letter: 'थ', romanized: 'tha' },
+    { letter: 'द', romanized: 'da' },
+    { letter: 'ध', romanized: 'dha' },
+    { letter: 'न', romanized: 'na' },
+    { letter: 'प', romanized: 'pa' },
+    { letter: 'फ', romanized: 'pha' },
+    { letter: 'ब', romanized: 'ba' },
+    { letter: 'भ', romanized: 'bha' },
+    { letter: 'म', romanized: 'ma' },
+    { letter: 'य', romanized: 'ya' },
+    { letter: 'र', romanized: 'ra' },
+    { letter: 'ल', romanized: 'la' },
+    { letter: 'व', romanized: 'va' },
+    { letter: 'श', romanized: 'sha' },
+    { letter: 'ष', romanized: 'Sa' },
+    { letter: 'स', romanized: 'sa' },
+    { letter: 'ह', romanized: 'ha' },
   ];
 
   return (
-    <div className="flex text-white min-h-screen">
+    <div className="flex text-white min-h-screen ">
       <div className="flex-1 flex flex-col md:flex-row">
         {/* Mobile top icons */}
         <div className="md:hidden flex justify-between items-center p-4">
-          <TopIcon icon="🇩🇪" label="German" />
+          <TopIcon icon="🇮🇳" label="Hindi" />
           <div className="flex space-x-4">
             <TopIcon icon="🔥" label="1" />
             <TopIcon icon="💎" label="505" />
@@ -51,68 +61,52 @@ const Learn: React.FC = () => {
         </div>
 
         {/* Main content */}
-        <main className="flex-1 p-5 md:p-6">
-          <header className="bg-[#58cc02] rounded-2xl p-4 mb-8 flex justify-between items-center">
-            <div>
-              <p className="text-xs font-bold mb-1">SECTION 1, UNIT 1</p>
-              <h1 className="text-2xl font-bold">Pair letters and sounds</h1>
-            </div>
-            <button className="bg-white text-[#58cc02] font-bold py-2 px-4 rounded-xl text-sm">
-              <span className="hidden md:inline">GUIDEBOOK</span>
-              <Zap size={20} className="md:hidden" />
-            </button>
-          </header>
+        <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+          <h1 className="text-3xl font-bold mb-4">Let's learn Hindi!</h1>
+          <p className="text-lg mb-6">Get to know the characters and sounds for Hindi</p>
 
-          <div className="flex flex-col items-center space-y-4 mb-8">
-            <div className="relative">
-              <button 
-                className="relative bg-[#58cc02] text-white font-bold p-4 rounded-full"
-                onClick={() => setShowTooltip(!showTooltip)}
-              >
-                <Star size={32} />
-                <div className="md:hidden absolute -top-2 -right-2 bg-[#1cb0f6] text-white text-xs font-bold px-2 py-1 rounded-full">
-                  START
-                </div>
-              </button>
-              
-              {showTooltip && (
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-xl shadow-lg p-4 w-64 z-10">
-                  <div className="text-black font-bold mb-2">Pair letters and sounds</div>
-                  <div className="text-gray-600 text-sm mb-4">Lesson 1 of 4</div>
-                  <button
-                    className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
-                    shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
-                    active:shadow-none active:translate-y-[5px]
-                    transition-all duration-150 ease-in-out"
-                  >
-                    START +10 XP
-                  </button>
-                </div>
-              )}
-            </div>
-            {[1, 2].map((_, index) => (
-              <div
+          <button className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
+            shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
+            active:shadow-none active:translate-y-[5px]
+            transition-all duration-150 ease-in-out mb-8">
+            LEARN THE LETTERS
+          </button>
+
+          <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-4">
+            {hindiLetters.map((letter, index) => (
+              <button
                 key={index}
-                className="w-16 h-16 bg-[#2b2b2b] rounded-full flex items-center justify-center"
+                className="text-white font-bold py-3 px-6 rounded-2xl
+        border-2 border-[#3c4956]
+        shadow-[0_5px_0_#2b3238] 
+        active:shadow-none active:translate-y-[5px]
+        transition-all duration-150 ease-in-out
+        flex flex-col items-center justify-center aspect-square"
               >
-                <Star size={24} className="text-[#5b5b5b]" />
-              </div>
+                <span className="text-2xl font-bold">{letter.letter}</span>
+                <span className="text-xs text-gray-400">{letter.romanized}</span>
+              </button>
             ))}
-            <div className="w-20 h-20 bg-[#2b2b2b] rounded-2xl flex items-center justify-center">
-              <img
-                src="https://d35aaqx5ub95lt.cloudfront.net/images/chest.svg"
-                alt="Chest"
-                className="w-12 h-12"
-              />
-            </div>
-            <div className="w-16 h-16 bg-[#2b2b2b] rounded-full flex items-center justify-center md:static absolute bottom-24 right-8">
-              <img
-                src="https://d35aaqx5ub95lt.cloudfront.net/images/owlHappy.svg"
-                alt="Duolingo Owl"
-                className="w-20 h-20"
-              />
-            </div>
           </div>
+
+          <div className="mt-8">
+  <h2 className="text-xl font-bold mb-4">Borrowed Characters</h2>
+  <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-4">
+    {['क़', 'ख़', 'ग़'].map((letter, index) => (
+      <button
+        key={index}
+        className="text-white font-bold py-3 px-6 rounded-2xl
+          border-2 border-[#3c4956]
+          shadow-[0_5px_0_#2b3238] 
+          active:shadow-none active:translate-y-[5px]
+          transition-all duration-150 ease-in-out
+          flex flex-col items-center justify-center aspect-square"
+      >
+        <span className="text-2xl font-bold">{letter}</span>
+      </button>
+    ))}
+  </div>
+</div>
         </main>
 
         {/* Right sidebar - hidden on mobile */}
@@ -131,7 +125,7 @@ const Learn: React.FC = () => {
             <h2 className="text-xl font-bold mb-2">Unlock Leaderboards!</h2>
             <div className="flex items-center">
               <div className="rounded-full p-2 mr-3">
-<img src="https://d35aaqx5ub95lt.cloudfront.net/images/leagues/d4280fdf64d66de7390fe84802432a53.svg" alt="lock" />              </div>
+                <img src="https://d35aaqx5ub95lt.cloudfront.net/images/leagues/d4280fdf64d66de7390fe84802432a53.svg" alt="lock" />              </div>
               <p className="text-sm">
                 Complete 10 more lessons to start competing
               </p>
@@ -145,12 +139,12 @@ const Learn: React.FC = () => {
                 VIEW ALL <ChevronRight size={16} />
               </button>
             </div>
-            <div className="bg-[#2a2a2a] rounded-xl p-3">
+            <div className=" rounded-xl p-3">
               <div className="flex items-center mb-2">
                 <Zap size={20} className="text-[#ffc800] mr-2" />
                 <p className="text-sm font-bold">Earn 10 XP</p>
               </div>
-              <div className="bg-[#1c1c1c] h-2 rounded-full">
+              <div className=" h-2 rounded-full">
                 <div className="bg-[#ffc800] h-full rounded-full w-0"></div>
               </div>
             </div>
@@ -196,7 +190,7 @@ const TopIcon: React.FC<{ icon: React.ReactNode; label: string; dropdown?: strin
 
   return (
     <div className="relative">
-      <button 
+      <button
         className="flex items-center bg-[#1f1f1f] rounded-full px-3 py-1"
         onClick={() => dropdown && setIsOpen(!isOpen)}
       >
@@ -214,4 +208,4 @@ const TopIcon: React.FC<{ icon: React.ReactNode; label: string; dropdown?: strin
   );
 };
 
-export default Learn;
+export default LettersPage;

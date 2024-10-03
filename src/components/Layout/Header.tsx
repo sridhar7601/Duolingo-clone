@@ -12,8 +12,8 @@ const Header: React.FC = () => {
     },
     {
       icon: "https://d35aaqx5ub95lt.cloudfront.net/vendor/3b4928101472fce4e9edac920c1b3817.svg",
-      label: "SOUNDS",
-      path: "/sounds",
+      label: "LETTERS",
+      path: "/letters",
     },
     {
       icon: "https://d35aaqx5ub95lt.cloudfront.net/vendor/ca9178510134b4b0893dbac30b6670aa.svg",
