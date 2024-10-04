@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { ChevronRight, Zap, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import AuthModal from "../components/Auth/AuthModal";
 import TopIcon from "../components/Common/TopIcon";
 
 const Learn: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [showTooltip, setShowTooltip] = useState<boolean | number>(false);
 
   const openAuthModal = (mode: "login" | "signup") => {
     setAuthMode(mode);
@@ -24,7 +24,7 @@ const Learn: React.FC = () => {
   //     <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />
   //   </button>
   // );
-  const LessonButton = ({ active = false, onClick = () => {}, size = 24, className = "", icon = <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />, tooltipContent = null, index }) => (
+  const LessonButton = ({ active = false, onClick = () => {}, size = 24, className = "", icon = <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />, tooltipContent = null as React.ReactNode, index }: { active?: boolean, onClick?: () => void, size?: number, className?: string, icon?: React.ReactNode, tooltipContent?: React.ReactNode, index: number }) => (
     <div className="relative">
       <button 
         className={`${active ? 'bg-[#58cc02]' : 'bg-[#2b2b2b]'} text-white font-bold rounded-full
@@ -36,11 +36,12 @@ const Learn: React.FC = () => {
           setShowTooltip(index);
         }}
         onMouseEnter={() => setShowTooltip(index)}
-        onMouseLeave={() => setShowTooltip(-1)}
+        onMouseLeave={() => setShowTooltip(false)}
+        
       >
         {icon || <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />}
       </button>
-      {showTooltip === index && tooltipContent && (
+      {(showTooltip === index) && tooltipContent && (
         <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-xl shadow-lg p-4 w-64 z-10">
           {tooltipContent}
         </div>

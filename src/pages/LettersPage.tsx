@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Star, ChevronRight, Lock, Zap, Flag, Flame } from "lucide-react";
+// import { Link, useLocation } from "react-router-dom";
+// import { Star, ChevronRight, Lock, Zap, Flag, Flame } from "lucide-react";
 import AuthModal from "../components/Auth/AuthModal";
 import TopIcon from "../components/Common/TopIcon";
 
 const LettersPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
-  const [showTooltip, setShowTooltip] = useState(false);
-  const location = useLocation();
+  // const [showTooltip, setShowTooltip] = useState(false);
+  // const location = useLocation();
 
   const openAuthModal = (mode: "login" | "signup") => {
     setAuthMode(mode);
@@ -94,7 +94,7 @@ const LettersPage: React.FC = () => {
             </div>
 
             {/* Borrowed Characters section */}
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <h2 className="text-xl font-bold mb-4">Borrowed Characters</h2>
               <div className="grid grid-cols-4 gap-2 md:gap-3">
                 {['क़', 'ख़', 'ग़'].map((letter, index) => (
@@ -111,7 +111,7 @@ const LettersPage: React.FC = () => {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </main>
 

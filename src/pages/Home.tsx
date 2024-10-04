@@ -13,7 +13,7 @@ const Home: React.FC = () => {
       >
         Get Started
       </button>
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} initialMode="login" />
     </div>
   );
 };
