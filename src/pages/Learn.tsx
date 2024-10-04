@@ -1,41 +1,28 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Star, ChevronRight, Lock, Zap, Flag, Flame } from "lucide-react";
+import { ChevronRight, Zap, Star } from "lucide-react";
 import AuthModal from "../components/Auth/AuthModal";
 
 const Learn: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
   const [showTooltip, setShowTooltip] = useState(false);
-  const location = useLocation();
 
   const openAuthModal = (mode: "login" | "signup") => {
     setAuthMode(mode);
     setIsAuthModalOpen(true);
   };
 
-  const navItems = [
-    {
-      icon: "🇩🇪",
-      label: "German",
-      path: "/learn",
-    },
-    {
-      icon: "🔥",
-      label: "1",
-      path: "/streak",
-    },
-    {
-      icon: "💎",
-      label: "505",
-      path: "/gems",
-    },
-    {
-      icon: "❤️",
-      label: "5",
-      path: "/hearts",
-    },
-  ];
+  const StarButton = ({ active = false, onClick = () => {}, size = 24, className = "" }) => (
+    <button 
+      className={`${active ? 'bg-[#58cc02]' : 'bg-[#2b2b2b]'} text-white font-bold rounded-full
+        shadow-[0_5px_0_${active ? '#58a700' : '#1f1f1f'}] hover:bg-${active ? '[#58cc02]/90' : '[#3b3b3b]'}
+        active:shadow-none active:translate-y-[5px]
+        transition-all duration-150 ease-in-out flex items-center justify-center ${className}`}
+      onClick={onClick}
+    >
+      <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />
+    </button>
+  );
 
   return (
     <div className="flex text-white min-h-screen">
@@ -44,36 +31,40 @@ const Learn: React.FC = () => {
         <div className="md:hidden flex justify-between items-center p-4">
           <TopIcon icon="🇩🇪" label="German" />
           <div className="flex space-x-4">
-            <TopIcon icon="🔥" label="1" />
-            <TopIcon icon="💎" label="505" />
+            <TopIcon icon="🔥" label="0" />
+            <TopIcon icon="💎" label="500" />
             <TopIcon icon="❤️" label="5" />
           </div>
         </div>
 
+       
         {/* Main content */}
         <main className="flex-1 p-5 md:p-6">
-          <header className="bg-[#58cc02] rounded-2xl p-4 mb-8 flex justify-between items-center">
-            <div>
-              <p className="text-xs font-bold mb-1">SECTION 1, UNIT 1</p>
-              <h1 className="text-2xl font-bold">Pair letters and sounds</h1>
+          <header className="bg-[#58cc02] rounded-2xl p-4 mb-8">
+            <div className="flex items-center">
+              <button className="mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <div>
+                <p className="text-xs font-bold mb-1">SECTION 1, UNIT 1</p>
+                <h1 className="text-2xl font-bold">Pair letters and sounds</h1>
+              </div>
             </div>
-            <button className="bg-white text-[#58cc02] font-bold py-2 px-4 rounded-xl text-sm">
-              <span className="hidden md:inline">GUIDEBOOK</span>
-              <Zap size={20} className="md:hidden" />
-            </button>
           </header>
 
-          <div className="flex flex-col items-center space-y-4 mb-8">
+          <div className="flex flex-col items-center space-y-8 mb-8">
             <div className="relative">
-              <button 
-                className="relative bg-[#58cc02] text-white font-bold p-4 rounded-full"
+              <StarButton
+                active={true}
                 onClick={() => setShowTooltip(!showTooltip)}
-              >
-                <Star size={32} />
-                <div className="md:hidden absolute -top-2 -right-2 bg-[#1cb0f6] text-white text-xs font-bold px-2 py-1 rounded-full">
-                  START
-                </div>
-              </button>
+                size={48}
+                className="w-24 h-24"
+              />
+              <div className="absolute -top-2 -right-2 bg-[#1cb0f6] text-white text-xs font-bold px-2 py-1 rounded-full">
+                START
+              </div>
               
               {showTooltip && (
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-xl shadow-lg p-4 w-64 z-10">
@@ -90,28 +81,32 @@ const Learn: React.FC = () => {
                 </div>
               )}
             </div>
-            {[1, 2].map((_, index) => (
-              <div
-                key={index}
-                className="w-16 h-16 bg-[#2b2b2b] rounded-full flex items-center justify-center"
-              >
-                <Star size={24} className="text-[#5b5b5b]" />
-              </div>
-            ))}
-            <div className="w-20 h-20 bg-[#2b2b2b] rounded-2xl flex items-center justify-center">
+            <StarButton size={32} className="w-20 h-20" />
+            <StarButton size={32} className="w-20 h-20" />
+            <div className="w-24 h-24 bg-[#2b2b2b] rounded-2xl flex items-center justify-center">
               <img
-                src="https://d35aaqx5ub95lt.cloudfront.net/images/chest.svg"
+                src="https://d35aaqx5ub95lt.cloudfront.com/images/chest.svg"
                 alt="Chest"
-                className="w-12 h-12"
+                className="w-16 h-16"
               />
             </div>
-            <div className="w-16 h-16 bg-[#2b2b2b] rounded-full flex items-center justify-center md:static absolute bottom-24 right-8">
+            <div className="w-24 h-24 flex items-center justify-center">
               <img
-                src="https://d35aaqx5ub95lt.cloudfront.net/images/owlHappy.svg"
+                src="https://i.pinimg.com/474x/37/a0/08/37a0087df24e8047f3e4a95c6f325d26.jpg"
                 alt="Duolingo Owl"
-                className="w-20 h-20"
+                className="w-full h-full"
               />
             </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-[#afafaf] mb-4">Pair letters and sounds</p>
+            <button className="bg-[#8e4dc3] text-white font-bold py-2 px-6 rounded-2xl
+              shadow-[0_5px_0_#6f2dbd] hover:bg-[#8e4dc3]/90
+              active:shadow-none active:translate-y-[5px]
+              transition-all duration-150 ease-in-out">
+              JUMP HERE?
+            </button>
           </div>
         </main>
 
@@ -119,45 +114,99 @@ const Learn: React.FC = () => {
         <aside className="hidden md:flex flex-col w-[22.5rem] space-y-4 pr-10">
           {/* Desktop top icons */}
           <div className="flex justify-between items-center mb-4">
-            <TopIcon icon={<Flag className="text-[#ce82ff]" size={20} />} label="German" dropdown="courses" />
-            <div className="flex space-x-4">
-              <TopIcon icon={<Flame className="text-[#ff9600]" size={20} />} label="1" dropdown="streak" />
-              <TopIcon icon={<span className="text-xs">💎</span>} label="505" dropdown="gems" />
-              <TopIcon icon={<span className="text-xs">❤️</span>} label="5" dropdown="hearts" />
+            <div className="flex justify-between items-center px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors duration-200">
+              <img
+                className="w-8 h-7"
+                src="https://d35aaqx5ub95lt.cloudfront.net/images/icons/ba95e6081679d9d7e8c132da5cfce1ec.svg"
+                alt="Flag"
+              />
+              <span className="text-[#4b4b4b] pl-[5px]">German</span>
+            </div>
+            <div className="flex space-x-2">
+              <div className="flex justify-between items-center px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors duration-200">
+                <img
+                  className="w-8 h-7"
+                  src="https://d35aaqx5ub95lt.cloudfront.net/images/icons/ba95e6081679d9d7e8c132da5cfce1ec.svg"
+                  alt="Flame"
+                />
+                <span className="text-[#4b4b4b] pl-[5px]">0</span>
+              </div>
+              <div className="flex items-center px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors duration-200">
+                <img
+                  className="w-8 h-7"
+                  src="https://d35aaqx5ub95lt.cloudfront.net/images/gems/45c14e05be9c1af1d7d0b54c6eed7eee.svg"
+                  alt="Diamond"
+                />
+                <span className="text-[#1CB0F6] pl-[5px]">500</span>
+              </div>
+              <div className="flex items-center px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors duration-200">
+                <img
+                  className="w-8 h-7"
+                  src="https://d35aaqx5ub95lt.cloudfront.net/images/hearts/8fdba477c56a8eeb23f0f7e67fdec6d9.svg"
+                  alt="Heart"
+                />
+                <span className="text-[#FF4B4B] pl-[6px]">5</span>
+              </div>
             </div>
           </div>
 
-          <div className="border-2 border-[#37464f] rounded-2xl p-3 h-40">
-            <h2 className="text-xl font-bold mb-2">Unlock Leaderboards!</h2>
-            <div className="flex items-center">
-              <div className="rounded-full p-2 mr-3">
-<img src="https://d35aaqx5ub95lt.cloudfront.net/images/leagues/d4280fdf64d66de7390fe84802432a53.svg" alt="lock" />              </div>
-              <p className="text-sm">
+            {/* Unlock Leaderboards section */}
+            <div className="rounded-2xl p-5 mb-4 border-2 border-[#37464f] min-w-[320px]">
+            <h2 className="font-bold font-din-round text-[#4B4B4B] text-lg">
+              Unlock Leaderboards!
+            </h2>
+            <div className="flex items-center space-x-4 mt-[25px] ml-3">
+              <img
+                src="https://d35aaqx5ub95lt.cloudfront.net/images/leagues/d4280fdf64d66de7390fe84802432a53.svg"
+                alt="lock"
+                className="w-14 h-12"
+              />
+              <p className="font-din-round-light text-gray-500 pl-4">
                 Complete 10 more lessons to start competing
               </p>
             </div>
           </div>
 
-          <div className="border-2 border-[#37464f] rounded-2xl p-4 h-40">
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-xl font-bold">Daily Quests</h2>
-              <button className="text-[#afafaf] text-sm font-bold flex items-center">
-                VIEW ALL <ChevronRight size={16} />
-              </button>
+          {/* Daily Quests section */}
+          <div className="rounded-2xl p-4 mb-4 border-2 border-[#37464f] min-w-[320px]">
+            <div className="flex justify-between">
+              <h2 className="font-bold font-din-round text-[#4B4B4B] text-lg">
+                Daily Quests
+              </h2>
+              <a href="#" className="text-[#1CB0F6] font-din-round text-sm">
+                VIEW ALL
+              </a>
             </div>
-            <div className="bg-[#2a2a2a] rounded-xl p-3">
-              <div className="flex items-center mb-2">
-                <Zap size={20} className="text-[#ffc800] mr-2" />
-                <p className="text-sm font-bold">Earn 10 XP</p>
-              </div>
-              <div className="bg-[#1c1c1c] h-2 rounded-full">
-                <div className="bg-[#ffc800] h-full rounded-full w-0"></div>
+            <div className="flex items-center mt-2 p-2">
+              <img
+                src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/2b5a211d830a24fab92e291d50f65d1d.svg"
+                alt="quest"
+                className="w-16 h-16"
+              />
+              <div className="mt-2 ml-4 flex-1">
+                <p className="font-din-round text-[#4B4B4B] font-bold">
+                  Earn 10 XP
+                </p>
+                <div className="flex justify-between items-center mt-2">
+                  <div className="w-full h-[20px] bg-gray-200 rounded-full rounded-tr-none rounded-br-none relative">
+                    <p className="font-din-round absolute text-gray-400 left-1/2 transform -translate-x-1/2 text-[14px]">
+                      0 / 10
+                    </p>
+                    <div className="top-0 left-0 w-[0%] h-full bg-yellow-400 rounded-full text-sm"></div>
+                  </div>
+                  <img
+                    className="w-8 h-9 ml-1 flex-shrink-0"
+                    src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/df7eda7cc1cc833ba30cd1e82781b68f.svg"
+                    alt="Quest icon"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="border-2 border-[#37464f] rounded-2xl p-4 space-y-3">
-            <h2 className="text-xl font-bold">
+          {/* Create profile section */}
+          <div className="rounded-2xl p-4 space-y-3 border-2 border-[#37464f] min-w-[320px]">
+            <h2 className="text-xl font-bold text-[#4B4B4B]">
               Create a profile to save your progress!
             </h2>
             <button
@@ -191,25 +240,11 @@ const Learn: React.FC = () => {
   );
 };
 
-const TopIcon: React.FC<{ icon: React.ReactNode; label: string; dropdown?: string }> = ({ icon, label, dropdown }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const TopIcon: React.FC<{ icon: React.ReactNode; label: string }> = ({ icon, label }) => {
   return (
-    <div className="relative">
-      <button 
-        className="flex items-center bg-[#1f1f1f] rounded-full px-3 py-1"
-        onClick={() => dropdown && setIsOpen(!isOpen)}
-      >
-        <div className="w-5 h-5 bg-[#1cb0f6] rounded-full flex items-center justify-center mr-2">
-          {icon}
-        </div>
-        <span>{label}</span>
-      </button>
-      {dropdown && isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-64 bg-[#1f1f1f] rounded-lg shadow-lg p-4">
-          {/* Dropdown content here */}
-        </div>
-      )}
+    <div className="flex items-center px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors duration-200">
+      <span className="mr-2">{icon}</span>
+      <span>{label}</span>
     </div>
   );
 };
