@@ -6,4 +6,11 @@
     background-color: rgb(19, 31, 36); /* or any valid color value */
     font-family: Arial, sans-serif;
   }
+  @font-face {
+    font-family: 'DIN Round';
+    src: url('/src/assets/fonts/dinroundpro_medi.light') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
   

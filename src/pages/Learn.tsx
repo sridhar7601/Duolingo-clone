@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ChevronRight, Zap, Star } from "lucide-react";
 import AuthModal from "../components/Auth/AuthModal";
+import TopIcon from "../components/Common/TopIcon";
 
 const Learn: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -12,29 +13,51 @@ const Learn: React.FC = () => {
     setIsAuthModalOpen(true);
   };
 
-  const StarButton = ({ active = false, onClick = () => {}, size = 24, className = "" }) => (
-    <button 
-      className={`${active ? 'bg-[#58cc02]' : 'bg-[#2b2b2b]'} text-white font-bold rounded-full
-        shadow-[0_5px_0_${active ? '#58a700' : '#1f1f1f'}] hover:bg-${active ? '[#58cc02]/90' : '[#3b3b3b]'}
-        active:shadow-none active:translate-y-[5px]
-        transition-all duration-150 ease-in-out flex items-center justify-center ${className}`}
-      onClick={onClick}
-    >
-      <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />
-    </button>
+  // const StarButton = ({ active = false, onClick = () => {}, size = 24, className = "" }) => (
+  //   <button 
+  //     className={`${active ? 'bg-[#58cc02]' : 'bg-[#2b2b2b]'} text-white font-bold rounded-full
+  //       shadow-[0_5px_0_${active ? '#58a700' : '#1f1f1f'}] hover:bg-${active ? '[#58cc02]/90' : '[#3b3b3b]'}
+  //       active:shadow-none active:translate-y-[5px]
+  //       transition-all duration-150 ease-in-out flex items-center justify-center ${className}`}
+  //     onClick={onClick}
+  //   >
+  //     <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />
+  //   </button>
+  // );
+  const LessonButton = ({ active = false, onClick = () => {}, size = 24, className = "", icon = <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />, tooltipContent = null, index }) => (
+    <div className="relative">
+      <button 
+        className={`${active ? 'bg-[#58cc02]' : 'bg-[#2b2b2b]'} text-white font-bold rounded-full
+          shadow-[0_5px_0_${active ? '#58a700' : '#1f1f1f'}] hover:bg-${active ? '[#58cc02]/90' : '[#3b3b3b]'}
+          active:shadow-none active:translate-y-[5px]
+          transition-all duration-150 ease-in-out flex items-center justify-center ${className}`}
+        onClick={() => {
+          onClick();
+          setShowTooltip(index);
+        }}
+        onMouseEnter={() => setShowTooltip(index)}
+        onMouseLeave={() => setShowTooltip(-1)}
+      >
+        {icon || <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />}
+      </button>
+      {showTooltip === index && tooltipContent && (
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-xl shadow-lg p-4 w-64 z-10">
+          {tooltipContent}
+        </div>
+      )}
+    </div>
   );
-
   return (
     <div className="flex text-white min-h-screen">
       <div className="flex-1 flex flex-col md:flex-row">
         {/* Mobile top icons */}
         <div className="md:hidden flex justify-between items-center p-4">
           <TopIcon icon="🇩🇪" label="German" />
-          <div className="flex space-x-4">
+          {/* <div className="flex space-x-4"> */}
             <TopIcon icon="🔥" label="0" />
             <TopIcon icon="💎" label="500" />
             <TopIcon icon="❤️" label="5" />
-          </div>
+          {/* </div> */}
         </div>
 
        
@@ -54,50 +77,48 @@ const Learn: React.FC = () => {
             </div>
           </header>
 
-          <div className="flex flex-col items-center space-y-8 mb-8">
-            <div className="relative">
-              <StarButton
-                active={true}
-                onClick={() => setShowTooltip(!showTooltip)}
-                size={48}
-                className="w-24 h-24"
-              />
-              <div className="absolute -top-2 -right-2 bg-[#1cb0f6] text-white text-xs font-bold px-2 py-1 rounded-full">
-                START
-              </div>
-              
-              {showTooltip && (
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-xl shadow-lg p-4 w-64 z-10">
-                  <div className="text-black font-bold mb-2">Pair letters and sounds</div>
-                  <div className="text-gray-600 text-sm mb-4">Lesson 1 of 4</div>
-                  <button
-                    className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
-                    shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
-                    active:shadow-none active:translate-y-[5px]
-                    transition-all duration-150 ease-in-out"
-                  >
-                    START +10 XP
-                  </button>
-                </div>
-              )}
-            </div>
-            <StarButton size={32} className="w-20 h-20" />
-            <StarButton size={32} className="w-20 h-20" />
-            <div className="w-24 h-24 bg-[#2b2b2b] rounded-2xl flex items-center justify-center">
-              <img
-                src="https://d35aaqx5ub95lt.cloudfront.com/images/chest.svg"
-                alt="Chest"
-                className="w-16 h-16"
-              />
-            </div>
-            <div className="w-24 h-24 flex items-center justify-center">
-              <img
-                src="https://i.pinimg.com/474x/37/a0/08/37a0087df24e8047f3e4a95c6f325d26.jpg"
-                alt="Duolingo Owl"
-                className="w-full h-full"
-              />
-            </div>
-          </div>
+          <div className="flex flex-col items-center space-y-4 mb-8">
+      <LessonButton
+        active={true}
+        size={38}
+        className="w-20 h-20"
+        tooltipContent={
+          <>
+            <div className="text-black font-bold mb-2">Pair letters and sounds</div>
+            <div className="text-gray-600 text-sm mb-4">Lesson 1 of 4</div>
+            <button className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
+              shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
+              active:shadow-none active:translate-y-[5px]
+              transition-all duration-150 ease-in-out">
+              START +10 XP
+            </button>
+          </>
+        }
+        index={0}
+      />
+      <LessonButton size={32} className="w-16 h-16 relative right-16" index={1}/>
+      <LessonButton size={32} className="w-16 h-16 relative right-20" index={2} />
+      <LessonButton
+        className="w-20 h-20  relative right-24"
+        icon={
+          <img
+            src="https://d35aaqx5ub95lt.cloudfront.net/images/path/0ae912c0b7a66354a850e6733ef653cb.svg"
+            alt="Chest"
+            className="w-16 h-16"
+          />
+        }
+        index={3}
+      />
+      <LessonButton size={32} className="w-16 h-16 relative right-20" index={4} />
+      <div className="w-24 h-24 flex items-center justify-center">
+        <img
+          src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/f4b1c683214cf55f5ddea4535b983745.svg"
+          alt="Duolingo Owl"
+          className="w-full h-full"
+        />
+      </div>
+    </div>
+
 
           <div className="text-center mt-8">
             <p className="text-[#afafaf] mb-4">Pair letters and sounds</p>
@@ -117,7 +138,7 @@ const Learn: React.FC = () => {
             <div className="flex justify-between items-center px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors duration-200">
               <img
                 className="w-8 h-7"
-                src="https://d35aaqx5ub95lt.cloudfront.net/images/icons/ba95e6081679d9d7e8c132da5cfce1ec.svg"
+                src= {"🇩🇪"}
                 alt="Flag"
               />
               <span className="text-[#4b4b4b] pl-[5px]">German</span>
@@ -152,7 +173,7 @@ const Learn: React.FC = () => {
 
             {/* Unlock Leaderboards section */}
             <div className="rounded-2xl p-5 mb-4 border-2 border-[#37464f] min-w-[320px]">
-            <h2 className="font-bold font-din-round text-[#4B4B4B] text-lg">
+            <h2 className="font-bold font-din-round text-[#F1F7Fb] text-lg">
               Unlock Leaderboards!
             </h2>
             <div className="flex items-center space-x-4 mt-[25px] ml-3">
@@ -170,7 +191,7 @@ const Learn: React.FC = () => {
           {/* Daily Quests section */}
           <div className="rounded-2xl p-4 mb-4 border-2 border-[#37464f] min-w-[320px]">
             <div className="flex justify-between">
-              <h2 className="font-bold font-din-round text-[#4B4B4B] text-lg">
+              <h2 className="font-bold font-din-round text-[#F1F7Fb] text-lg">
                 Daily Quests
               </h2>
               <a href="#" className="text-[#1CB0F6] font-din-round text-sm">
@@ -184,12 +205,12 @@ const Learn: React.FC = () => {
                 className="w-16 h-16"
               />
               <div className="mt-2 ml-4 flex-1">
-                <p className="font-din-round text-[#4B4B4B] font-bold">
+                <p className="font-din-round text-[#F1F7Fb] font-bold">
                   Earn 10 XP
                 </p>
                 <div className="flex justify-between items-center mt-2">
-                  <div className="w-full h-[20px] bg-gray-200 rounded-full rounded-tr-none rounded-br-none relative">
-                    <p className="font-din-round absolute text-gray-400 left-1/2 transform -translate-x-1/2 text-[14px]">
+                  <div className="w-full h-[20px] bg-[#37464F] rounded-full rounded-tr-none rounded-br-none relative">
+                    <p className="font-din-round absolute text-[#AFAFAF] left-1/2 transform -translate-x-1/2 text-[14px]">
                       0 / 10
                     </p>
                     <div className="top-0 left-0 w-[0%] h-full bg-yellow-400 rounded-full text-sm"></div>
@@ -206,7 +227,7 @@ const Learn: React.FC = () => {
 
           {/* Create profile section */}
           <div className="rounded-2xl p-4 space-y-3 border-2 border-[#37464f] min-w-[320px]">
-            <h2 className="text-xl font-bold text-[#4B4B4B]">
+            <h2 className="text-xl font-din-round font-bold text-[#F1F7Fb]">
               Create a profile to save your progress!
             </h2>
             <button
@@ -228,7 +249,7 @@ const Learn: React.FC = () => {
               SIGN IN
             </button>
           </div>
-        </aside>
+        </aside>  
       </div>
 
       <AuthModal
@@ -240,13 +261,5 @@ const Learn: React.FC = () => {
   );
 };
 
-const TopIcon: React.FC<{ icon: React.ReactNode; label: string }> = ({ icon, label }) => {
-  return (
-    <div className="flex items-center px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors duration-200">
-      <span className="mr-2">{icon}</span>
-      <span>{label}</span>
-    </div>
-  );
-};
 
 export default Learn;

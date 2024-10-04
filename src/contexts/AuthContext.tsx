@@ -3,7 +3,6 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 interface User {
   id: string;
   email: string;
-  // Add other user properties as needed
 }
 
 interface AuthContextType {
@@ -22,12 +21,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = (userData: User) => {
-    // Implement login logic
     setUser(userData);
   };
 
   const logout = () => {
-    // Implement logout logic
     setUser(null);
   };
 

@@ -21,7 +21,7 @@ const App: React.FC = () => {
           {/* Main Content Area */}
           <main className="flex-grow p-4 md:p-6 md:ml-[72px] xl:ml-[256px] overflow-y-auto">
             <Routes>
-              <Route path="/" element={<Home />} />
+              {/* <Route path="/" element={<Home />} /> */}
               <Route path="/learn" element={<Learn />} />
               <Route path="/letters" element={<LettersPage />} />
               <Route path="/login" element={<Login />} />

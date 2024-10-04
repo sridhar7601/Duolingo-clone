@@ -82,8 +82,8 @@ const Header: React.FC = () => {
       </header>
 
       {/* Mobile bottom navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t-2 border-[#37464f] p-2">
-        <div className="flex justify-around items-center">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t-2 bg-[#131F24] border-[#37464f] p-2 md:align-center">
+        <div className="flex justify-around bg-[#131F24] items-center">
           {navItems.map((item) => (
             <Link
               key={item.label}
