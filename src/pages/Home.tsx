@@ -1,3 +1,4 @@
+// src/pages/Home.tsx
 import React, { useState } from 'react';
 import AuthModal from '../components/Auth/AuthModal';
 

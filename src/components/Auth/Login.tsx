@@ -1,3 +1,4 @@
+// src/components/Auth/Login.tsx
 import React, { useState } from 'react';
 
 const Login: React.FC = () => {
@@ -59,7 +60,7 @@ const Login: React.FC = () => {
           active:shadow-none active:translate-y-[5px]
           transition-all duration-150 ease-in-out
         ">
-          <span className="mr-2">f</span> {/* Replace with Facebook icon */}
+          <span className="mr-2">f</span>
           FACEBOOK
         </button>
         <button className="
@@ -69,12 +70,11 @@ const Login: React.FC = () => {
           active:shadow-none active:translate-y-[5px]
           transition-all duration-150 ease-in-out
         ">
-          <span className="mr-2">G</span> {/* Replace with Google icon */}
+          <span className="mr-2">G</span>
           GOOGLE
         </button>
       </div>
 
-      {/* Add the paragraph about terms and policies here */}
       <div className="mt-6 text-sm text-[#afafaf] max-w-sm mx-auto">
         <p>By signing in to Duolingo, you agree to our <a href="#" className="underline hover:text-white">Terms</a> and <a href="#" className="underline hover:text-white">Privacy Policy</a>.</p>
         <p>This site is protected by reCAPTCHA Enterprise and the Google <a href="#" className="underline hover:text-white">Privacy Policy</a> and <a href="#" className="underline hover:text-white">Terms of Service</a> apply.</p>

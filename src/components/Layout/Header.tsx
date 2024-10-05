@@ -1,3 +1,4 @@
+// src/components/Layout/Header.tsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -44,7 +45,6 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {/* Header visible on medium screens (md) and larger */}
       <header className="hidden md:flex flex-col h-screen w-[72px] xl:w-[256px] border-r-2 border-[#37464f] py-6">
         <div className="mb-5 mt-2 px-4 xl:px-8">
           <img
@@ -81,8 +81,7 @@ const Header: React.FC = () => {
         </nav>
       </header>
 
-      {/* Mobile bottom navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t-2 bg-[#131F24] border-[#37464f] p-2 md:align-center">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t-2 bg-[#131F24] border-[#37464f] p-2">
         <div className="flex justify-around bg-[#131F24] items-center">
           {navItems.map((item) => (
             <Link

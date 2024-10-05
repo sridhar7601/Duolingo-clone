@@ -1,3 +1,4 @@
+// src/components/Auth/Signup.tsx
 import React, { useState } from 'react';
 
 const Signup: React.FC = () => {
@@ -61,7 +62,7 @@ const Signup: React.FC = () => {
         <button
           type="submit"
           className="
-            bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
+            w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
             shadow-[0_5px_0_#58a700]
             hover:bg-[#58cc02]/90
             active:shadow-none active:translate-y-[5px]
@@ -76,14 +77,14 @@ const Signup: React.FC = () => {
         <span className="text-[#afafaf]">OR</span>
       </div>
       <button className="
-        bg-[#4267B2] text-white font-bold py-3 px-6 rounded-2xl
+        w-full bg-[#4267B2] text-white font-bold py-3 px-6 rounded-2xl
         shadow-[0_5px_0_#3b5998]
         hover:bg-[#4267B2]/90
         active:shadow-none active:translate-y-[5px]
         transition-all duration-150 ease-in-out
         mt-4
       ">
-        <span className="mr-2">f</span> {/* Replace with Facebook icon */}
+        <span className="mr-2">f</span>
         FACEBOOK
       </button>
 

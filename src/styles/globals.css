@@ -1,0 +1,17 @@
+/* // src/styles/globals.css */
+/* Add this to your globals.css or equivalent file */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  @apply bg-[#0a0a0a] text-white;
+}
+
+.font-din-round {
+  font-family: 'DIN Round Pro', sans-serif;
+}
+
+.font-din-round-light {
+  font-family: 'DIN Round Pro Light', sans-serif;
+}
