@@ -1,12 +1,14 @@
-// src/components/Learn/LearningPath.tsx
 import React from 'react';
 import LessonButton from './LessonButton';
+import { useLesson } from '../../contexts/LessonContext';
 
 interface LearningPathProps {
   sectionNumber: number;
 }
 
 const LearningPath: React.FC<LearningPathProps> = ({ sectionNumber }) => {
+  const { startLesson } = useLesson();
+
   return (
     <div className="mb-20">
       <div className="flex flex-col items-center space-y-4">
@@ -18,10 +20,13 @@ const LearningPath: React.FC<LearningPathProps> = ({ sectionNumber }) => {
             <>
               <div className="text-black font-bold mb-2">Pair letters and sounds</div>
               <div className="text-gray-600 text-sm mb-4">Lesson 1 of 4</div>
-              <button className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
-                shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
-                active:shadow-none active:translate-y-[5px]
-                transition-all duration-150 ease-in-out">
+              <button 
+                className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
+                  shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
+                  active:shadow-none active:translate-y-[5px]
+                  transition-all duration-150 ease-in-out"
+                onClick={startLesson}
+              >
                 START +10 XP
               </button>
             </>

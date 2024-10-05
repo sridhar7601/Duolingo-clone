@@ -35,7 +35,7 @@ const LessonButton: React.FC<LessonButtonProps> = ({
           setShowTooltip(true);
         }}
         onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
+        onMouseLeave={() => setShowTooltip(true)}
       >
         {icon || <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />}
       </button>
