@@ -37,7 +37,7 @@ const Learn: React.FC = () => {
         }}
         onMouseEnter={() => setShowTooltip(index)}
         onMouseLeave={() => setShowTooltip(false)}
-        
+
       >
         {icon || <Star size={size} fill={active ? "white" : "none"} stroke={active ? "white" : "#5b5b5b"} />}
       </button>
@@ -63,7 +63,7 @@ const Learn: React.FC = () => {
 
        
         {/* Main content */}
-        <main className="flex-1 p-5 md:p-6">
+        <main className="flex-1 p-5 md:p-6 lg:p-8">
           <header className="bg-[#58cc02] rounded-2xl p-4 mb-8">
             <div className="flex items-center">
               <button className="mr-2">
