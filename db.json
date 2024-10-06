@@ -1,0 +1,58 @@
+{
+    "languages": [
+      { "id": 1, "name": "Hindi", "code": "hi", "flag": "🇮🇳" }
+    ],
+    "units": [
+      { "id": 1, "languageId": 1, "name": "Basics", "order": 1 }
+    ],
+    "lessons": [
+      { "id": 1, "unitId": 1, "name": "Pair letters and sounds", "order": 1 }
+    ],
+    "questions": [
+      { "id": 1, "lessonId": 1, "hindi": "यह एक केला है।", "english": "This is a banana." },
+      { "id": 2, "lessonId": 1, "hindi": "मैं पानी पीता हूं।", "english": "I drink water." },
+      { "id": 3, "lessonId": 1, "hindi": "आप कैसे हैं?", "english": "How are you?" },
+      { "id": 4, "lessonId": 1, "hindi": "मुझे हिंदी पसंद है।", "english": "I like Hindi." },
+      { "id": 5, "lessonId": 1, "hindi": "वह किताब पढ़ रही है।", "english": "She is reading a book." },
+      { "id": 6, "lessonId": 1, "hindi": "मैं भारत से हूं।", "english": "I am from India." },
+      { "id": 7, "lessonId": 1, "hindi": "क्या आप चाय पीएंगे?", "english": "Would you like to drink tea?" },
+      { "id": 8, "lessonId": 1, "hindi": "आज मौसम अच्छा है।", "english": "The weather is good today." },
+      { "id": 9, "lessonId": 1, "hindi": "मेरा नाम राहुल है।", "english": "My name is Rahul." },
+      { "id": 10, "lessonId": 1, "hindi": "मुझे भारतीय खाना पसंद है।", "english": "I like Indian food." }
+    ],
+    "hindiLetters": [
+      { "id": 1, "letter": "क", "romanized": "ka" },
+      { "id": 2, "letter": "ख", "romanized": "kha" },
+      { "id": 3, "letter": "ग", "romanized": "ga" },
+      { "id": 4, "letter": "घ", "romanized": "gha" },
+      { "id": 5, "letter": "च", "romanized": "ca" },
+      { "id": 6, "letter": "छ", "romanized": "cha" },
+      { "id": 7, "letter": "ज", "romanized": "ja" },
+      { "id": 8, "letter": "झ", "romanized": "jha" },
+      { "id": 9, "letter": "ट", "romanized": "Ta" },
+      { "id": 10, "letter": "ठ", "romanized": "Tha" },
+      { "id": 11, "letter": "ड", "romanized": "Da" },
+      { "id": 12, "letter": "ढ", "romanized": "Dha" },
+      { "id": 13, "letter": "त", "romanized": "ta" },
+      { "id": 14, "letter": "थ", "romanized": "tha" },
+      { "id": 15, "letter": "द", "romanized": "da" },
+      { "id": 16, "letter": "ध", "romanized": "dha" },
+      { "id": 17, "letter": "न", "romanized": "na" },
+      { "id": 18, "letter": "प", "romanized": "pa" },
+      { "id": 19, "letter": "फ", "romanized": "pha" },
+      { "id": 20, "letter": "ब", "romanized": "ba" },
+      { "id": 21, "letter": "भ", "romanized": "bha" },
+      { "id": 22, "letter": "म", "romanized": "ma" },
+      { "id": 23, "letter": "य", "romanized": "ya" },
+      { "id": 24, "letter": "र", "romanized": "ra" },
+      { "id": 25, "letter": "ल", "romanized": "la" },
+      { "id": 26, "letter": "व", "romanized": "va" },
+      { "id": 27, "letter": "श", "romanized": "sha" },
+      { "id": 28, "letter": "ष", "romanized": "Sa" },
+      { "id": 29, "letter": "स", "romanized": "sa" },
+      { "id": 30, "letter": "ह", "romanized": "ha" }
+    ],
+    "userProgress": [
+      { "id": 1, "userId": 1, "lessonId": 1, "completed": false, "hearts": 5, "currentQuestionIndex": 0 }
+    ]
+  }
