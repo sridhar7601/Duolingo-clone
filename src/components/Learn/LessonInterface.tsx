@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLesson } from '../../contexts/LessonContext';
+import { X } from 'lucide-react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const questions = [
   { id: 1, hindi: 'यह एक केला है।', english: 'This is a banana.' },
@@ -14,81 +16,59 @@ const questions = [
   { id: 10, hindi: 'वह स्कूल जा रहा है।', english: 'He is going to school.' }
 ];
 
-const normalizeString = (str: string): string => {
-  return str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
-};
 
 const LessonInterface: React.FC = () => {
-  const { currentQuestionIndex, hearts, setHearts, nextQuestion } = useLesson();
-  const [userAnswer, setUserAnswer] = useState('');
-  const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [disableInput, setDisableInput] = useState(false);
+  const { currentQuestionIndex, hearts, setHearts, nextQuestion, exitLesson } = useLesson();
+  const [selectedWords, setSelectedWords] = useState<string[]>([]);
+  const [availableWords, setAvailableWords] = useState<string[]>([]);
 
   const currentQuestion = questions[currentQuestionIndex];
 
   useEffect(() => {
-    setUserAnswer('');
-    setFeedback(null);
-    setShowAnswer(false);
-    setDisableInput(false);
+    const words = currentQuestion.english.split(' ');
+    setAvailableWords(words.sort(() => Math.random() - 0.5));
+    setSelectedWords([]);
   }, [currentQuestionIndex]);
 
-  const handleCheck = () => {
-    const normalizedUserAnswer = normalizeString(userAnswer);
-    const normalizedCorrectAnswer = normalizeString(currentQuestion.english);
+  const onDragEnd = (result: any) => {
+    if (!result.destination) return;
 
-    if (normalizedUserAnswer === normalizedCorrectAnswer) {
-      setFeedback('correct');
-      setDisableInput(true);
-      setTimeout(() => {
-        nextQuestion();
-      }, 1500);
+    const sourceList = result.source.droppableId === 'selected' ? selectedWords : availableWords;
+    const destList = result.destination.droppableId === 'selected' ? selectedWords : availableWords;
+
+    const [movedItem] = sourceList.splice(result.source.index, 1);
+    destList.splice(result.destination.index, 0, movedItem);
+
+    setSelectedWords([...selectedWords]);
+    setAvailableWords([...availableWords]);
+  };
+
+  const handleWordClick = (word: string, isSelected: boolean) => {
+    if (isSelected) {
+      setSelectedWords(selectedWords.filter(w => w !== word));
+      setAvailableWords([...availableWords, word]);
     } else {
-      setFeedback('incorrect');
+      setSelectedWords([...selectedWords, word]);
+      setAvailableWords(availableWords.filter(w => w !== word));
+    }
+  };
+
+  const handleCheck = () => {
+    const userAnswer = selectedWords.join(' ');
+    if (userAnswer === currentQuestion.english) {
+      nextQuestion();
+    } else {
       setHearts(hearts - 1);
-      setShowAnswer(true);
-      setDisableInput(true);
-      setTimeout(() => {
-        setShowAnswer(false);
-        setDisableInput(false);
-        setUserAnswer('');
-        setFeedback(null);
-      }, 3000);
     }
   };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !disableInput) {
-      handleCheck();
-    }
-  };
-
-  if (currentQuestionIndex >= questions.length || hearts <= 0) {
-    return (
-      <div className="bg-[#1f1f1f] text-white p-6 rounded-lg text-center">
-        <h2 className="text-2xl font-bold mb-4">
-          {hearts <= 0 ? "Lesson Failed!" : "Lesson Completed!"}
-        </h2>
-        <p>
-          {hearts <= 0
-            ? "You've run out of hearts. Try again!"
-            : `You've completed all ${questions.length} questions!`}
-        </p>
-        <button
-          onClick={() => window.location.reload()}
-          className="mt-4 bg-[#58cc02] text-white font-bold py-2 px-4 rounded"
-        >
-          Restart Lesson
-        </button>
-      </div>
-    );
-  }
 
   return (
-    <div className="bg-[#1f1f1f] text-white p-6 rounded-lg">
-      <div className="flex justify-between mb-4">
-        <div className="w-3/4 bg-gray-700 h-2 rounded">
+    <div className="fixed inset-0 bg-[#0e1821] text-white flex flex-col">
+      <div className="flex justify-between items-center p-4">
+        <button onClick={exitLesson} className="text-white">
+          <X size={24} />
+        </button>
+        <div className="w-1/2 bg-gray-700 h-2 rounded">
           <div 
             className="bg-[#58cc02] h-full rounded" 
             style={{width: `${(currentQuestionIndex / questions.length) * 100}%`}}
@@ -100,41 +80,85 @@ const LessonInterface: React.FC = () => {
           ))}
         </div>
       </div>
-      <h2 className="text-2xl font-bold mb-4">Write this in English</h2>
-      <div className="flex items-center mb-4">
-        <img 
-          src="https://i.pinimg.com/564x/c7/37/90/c7379088a66d3ab172ec64a80128b171.jpg" 
-          alt="Character" 
-          className="w-16 h-16 mr-4"
-        />
-        <div className="bg-gray-700 p-2 rounded">
-          <span>{currentQuestion.hindi}</span>
+      <div className="flex-grow flex flex-col items-center justify-center p-4">
+        <h2 className="text-2xl font-bold mb-8">Write this in English</h2>
+        <div className="flex items-center mb-8">
+          <img 
+            src="/api/placeholder/80/80" 
+            alt="Character" 
+            className="w-20 h-20 mr-4"
+          />
+          <div className="bg-[#1f3041] p-3 rounded-lg text-lg flex items-center">
+            <span>{currentQuestion.hindi}</span>
+            <button className="ml-2">🔊</button>
+          </div>
         </div>
+
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="selected" direction="horizontal">
+            {(provided) => (
+              <div 
+                ref={provided.innerRef} 
+                {...provided.droppableProps}
+                className="w-full max-w-2xl border-b border-gray-600 mb-4 min-h-[50px] flex flex-wrap"
+              >
+                {selectedWords.map((word, index) => (
+                  <Draggable key={word} draggableId={word} index={index}>
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className="bg-[#3c5571] m-1 p-2 rounded cursor-pointer"
+                        onClick={() => handleWordClick(word, true)}
+                      >
+                        {word}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+
+          <Droppable droppableId="available" direction="horizontal">
+            {(provided) => (
+              <div 
+                ref={provided.innerRef} 
+                {...provided.droppableProps}
+                className="flex flex-wrap justify-center items-start min-h-[100px] w-full max-w-2xl"
+              >
+                {availableWords.map((word, index) => (
+                  <Draggable key={word} draggableId={word} index={index}>
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className="bg-[#3c5571] m-1 p-2 rounded cursor-pointer"
+                        onClick={() => handleWordClick(word, false)}
+                      >
+                        {word}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
-      <input
-        type="text"
-        value={userAnswer}
-        onChange={(e) => setUserAnswer(e.target.value)}
-        onKeyPress={handleKeyPress}
-        className={`w-full p-2 rounded mb-4 ${
-          feedback === 'correct' ? 'bg-green-500' : 
-          feedback === 'incorrect' ? 'bg-red-500' : 'bg-gray-700'
-        }`}
-        placeholder="Type your answer here"
-        disabled={disableInput}
-      />
-      {showAnswer && (
-        <div className="text-yellow-500 mb-2">
-          Correct answer: {currentQuestion.english}
-        </div>
-      )}
-      <button
-        onClick={handleCheck}
-        className="bg-[#58cc02] text-white font-bold py-2 px-4 rounded"
-        disabled={disableInput}
-      >
-        Check
-      </button>
+
+      <div className="p-4 flex justify-center">
+        <button
+          onClick={handleCheck}
+          className="w-40 bg-[#58cc02] text-white font-bold py-3 px-6 rounded-xl text-xl"
+        >
+          CHECK
+        </button>
+      </div>
     </div>
   );
 };

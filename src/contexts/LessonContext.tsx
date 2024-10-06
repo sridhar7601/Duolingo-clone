@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface LessonContextType {
   isLessonStarted: boolean;
   startLesson: () => void;
+  exitLesson: () => void;
   currentQuestionIndex: number;
   hearts: number;
   setHearts: (hearts: number) => void;
@@ -17,12 +18,18 @@ export const LessonProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [hearts, setHearts] = useState(5);
 
   const startLesson = () => setIsLessonStarted(true);
+  const exitLesson = () => {
+    setIsLessonStarted(false);
+    setCurrentQuestionIndex(0);
+    setHearts(5);
+  };
   const nextQuestion = () => setCurrentQuestionIndex(prev => prev + 1);
 
   return (
     <LessonContext.Provider value={{
       isLessonStarted,
       startLesson,
+      exitLesson,
       currentQuestionIndex,
       hearts,
       setHearts,

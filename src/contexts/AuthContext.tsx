@@ -12,7 +12,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = async (email: string, password: string) => {
+  const login = async (_email: string, _password: string) => {
     // Implement your login logic here
     // For now, we'll just set isAuthenticated to true
     setIsAuthenticated(true);

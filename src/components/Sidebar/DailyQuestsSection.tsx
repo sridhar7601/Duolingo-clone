@@ -23,7 +23,7 @@ const DailyQuestsSection: React.FC = () => {
             Earn 10 XP
           </p>
           <div className="flex justify-between items-center mt-2">
-            <div className="w-full h-[20px] bg-[#37464F] rounded-full rounded-tr-none rounded-br-none relative">
+            <div className="w-full h-[20px] bg-[#37464F] rounded-full rounded-tr-none rounded-br-none relative -z-10">
               <p className="font-din-round absolute text-[#AFAFAF] left-1/2 transform -translate-x-1/2 text-[14px]">
                 0 / 10
               </p>

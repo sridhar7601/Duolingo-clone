@@ -2,11 +2,17 @@ import React from 'react';
 import LessonButton from './LessonButton';
 import { useLesson } from '../../contexts/LessonContext';
 
-interface LearningPathProps {
-  sectionNumber: number;
+interface Lesson {
+  id: number;
+  name: string;
+  order: number;
 }
 
-const LearningPath: React.FC<LearningPathProps> = ({ sectionNumber }) => {
+interface LearningPathProps {
+  lessons: Lesson[];
+}
+
+const LearningPath: React.FC<LearningPathProps> = ({ lessons }) => {
   const { startLesson } = useLesson();
 
   return (
@@ -18,8 +24,8 @@ const LearningPath: React.FC<LearningPathProps> = ({ sectionNumber }) => {
           className="w-20 h-20"
           tooltipContent={
             <>
-              <div className="text-black font-bold mb-2">Pair letters and sounds</div>
-              <div className="text-gray-600 text-sm mb-4">Lesson 1 of 4</div>
+              <div className="text-black font-bold mb-2">{lessons[0]?.name}</div>
+              <div className="text-gray-600 text-sm mb-4">Lesson 1 of {lessons.length}</div>
               <button 
                 className="w-full bg-[#58cc02] text-white font-bold py-3 px-6 rounded-2xl
                   shadow-[0_5px_0_#58a700] hover:bg-[#58cc02]/90
@@ -56,7 +62,7 @@ const LearningPath: React.FC<LearningPathProps> = ({ sectionNumber }) => {
         </div>
       </div>
       <div className="text-center mt-8">
-        <p className="text-[#afafaf] mb-4">Pair letters and sounds</p>
+        <p className="text-[#afafaf] mb-4">{lessons[0]?.name}</p>
         <button className="bg-[#8e4dc3] text-white font-bold py-2 px-6 rounded-2xl
           shadow-[0_5px_0_#6f2dbd] hover:bg-[#8e4dc3]/90
           active:shadow-none active:translate-y-[5px]

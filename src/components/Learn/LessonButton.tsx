@@ -18,9 +18,7 @@ const LessonButton: React.FC<LessonButtonProps> = ({
   size = 24,
   className = "",
   icon,
-  tooltipContent,
-  index
-}) => {
+  tooltipContent}) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (

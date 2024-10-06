@@ -1,4 +1,6 @@
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchUnits, fetchLessons } from '../utils/api';
 import LearningPath from '../components/Learn/LearningPath';
 import Sidebar from '../components/Sidebar/Sidebar';
 import AuthModal from '../components/Auth/AuthModal';
@@ -9,6 +11,17 @@ const LearnContent: React.FC = () => {
   const { isLessonStarted } = useLesson();
   const [isAuthModalOpen, setIsAuthModalOpen] = React.useState(false);
   const [authMode, setAuthMode] = React.useState<"login" | "signup">("signup");
+
+  const unitsQuery = useQuery({
+    queryKey: ['units', 1],
+    queryFn: () => fetchUnits(1)
+  });
+
+  const lessonsQuery = useQuery({
+    queryKey: ['lessons', unitsQuery.data?.[0]?.id],
+    queryFn: () => fetchLessons(unitsQuery.data?.[0]?.id),
+    enabled: !!unitsQuery.data?.[0]?.id
+  });
 
   const openAuthModal = (mode: "login" | "signup") => {
     setAuthMode(mode);
@@ -30,12 +43,12 @@ const LearnContent: React.FC = () => {
                   </svg>
                 </button>
                 <div>
-                  <p className="text-xs font-bold mb-1">SECTION 1, UNIT 1</p>
-                  <h1 className="text-2xl font-bold">Pair letters and sounds</h1>
+                  <p className="text-xs font-bold mb-1">SECTION 1, UNIT {unitsQuery.data?.[0]?.order}</p>
+                  <h1 className="text-2xl font-bold">{unitsQuery.data?.[0]?.name}</h1>
                 </div>
               </div>
             </header>
-            <LearningPath sectionNumber={1} />
+            {lessonsQuery.data && <LearningPath lessons={lessonsQuery.data} />}
           </>
         )}
       </div>

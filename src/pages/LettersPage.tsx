@@ -1,50 +1,36 @@
-// src/pages/LettersPage.tsx
 import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchHindiLetters } from '../utils/api';
 import Sidebar from '../components/Sidebar/Sidebar';
 import AuthModal from '../components/Auth/AuthModal';
+
+interface HindiLetter {
+  id: number;
+  letter: string;
+  romanized: string;
+}
 
 const LettersPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
+
+  const { data: hindiLetters, isLoading, isError } = useQuery<HindiLetter[]>({
+    queryKey: ['hindiLetters'],
+    queryFn: fetchHindiLetters
+  });
 
   const openAuthModal = (mode: "login" | "signup") => {
     setAuthMode(mode);
     setIsAuthModalOpen(true);
   };
 
-const hindiLetters = [
-  { letter: 'क', romanized: 'ka' },
-  { letter: 'ख', romanized: 'kha' },
-  { letter: 'ग', romanized: 'ga' },
-  { letter: 'घ', romanized: 'gha' },
-  { letter: 'च', romanized: 'ca' },
-  { letter: 'छ', romanized: 'cha' },
-  { letter: 'ज', romanized: 'ja' },
-  { letter: 'झ', romanized: 'jha' },
-  { letter: 'ट', romanized: 'Ta' },
-  { letter: 'ठ', romanized: 'Tha' },
-  { letter: 'ड', romanized: 'Da' },
-  { letter: 'ढ', romanized: 'Dha' },
-  { letter: 'त', romanized: 'ta' },
-  { letter: 'थ', romanized: 'tha' },
-  { letter: 'द', romanized: 'da' },
-  { letter: 'ध', romanized: 'dha' },
-  { letter: 'न', romanized: 'na' },
-  { letter: 'प', romanized: 'pa' },
-  { letter: 'फ', romanized: 'pha' },
-  { letter: 'ब', romanized: 'ba' },
-  { letter: 'भ', romanized: 'bha' },
-  { letter: 'म', romanized: 'ma' },
-  { letter: 'य', romanized: 'ya' },
-  { letter: 'र', romanized: 'ra' },
-  { letter: 'ल', romanized: 'la' },
-  { letter: 'व', romanized: 'va' },
-  { letter: 'श', romanized: 'sha' },
-  { letter: 'ष', romanized: 'Sa' },
-  { letter: 'स', romanized: 'sa' },
-  { letter: 'ह', romanized: 'ha' },
-];
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
+  if (isError) {
+    return <div>Error loading Hindi letters</div>;
+  }
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -60,9 +46,9 @@ const hindiLetters = [
           </button>
         </div>
         <div className="grid grid-cols-4 gap-3 max-w-md mx-auto">
-          {hindiLetters.map((letter, index) => (
+          {hindiLetters?.map((letter) => (
             <button
-              key={index}
+              key={letter.id}
               className="w-full aspect-square text-white font-bold p-1 rounded-xl
                 border-2 border-[#3c4956]
                 shadow-[0_4px_0_#3c4956] 
