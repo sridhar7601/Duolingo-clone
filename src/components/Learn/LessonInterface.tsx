@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLesson } from '../../contexts/LessonContext';
-import { X } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import toast, { Toaster } from 'react-hot-toast';
 
 const questions = [
   { id: 1, hindi: 'यह एक केला है।', english: 'This is a banana.' },
@@ -15,7 +16,6 @@ const questions = [
   { id: 9, hindi: 'मुझे भारतीय खाना पसंद है।', english: 'I like Indian food.' },
   { id: 10, hindi: 'वह स्कूल जा रहा है।', english: 'He is going to school.' }
 ];
-
 
 const LessonInterface: React.FC = () => {
   const { currentQuestionIndex, hearts, setHearts, nextQuestion, exitLesson } = useLesson();
@@ -56,14 +56,45 @@ const LessonInterface: React.FC = () => {
   const handleCheck = () => {
     const userAnswer = selectedWords.join(' ');
     if (userAnswer === currentQuestion.english) {
+      toast.success('Correct answer!', {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       nextQuestion();
     } else {
-      setHearts(hearts - 1);
+      toast.error('Wrong answer. Try again!', {
+        icon: '😕',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      if (hearts > 0) {
+        setHearts(hearts - 1);
+      }
+      if (hearts === 1) {
+        // This was the last heart
+        toast('Lesson failed. Try again!', {
+          icon: '💔',
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        exitLesson();
+      }
     }
   };
 
   return (
     <div className="fixed inset-0 bg-[#0e1821] text-white flex flex-col">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-between items-center p-4">
         <button onClick={exitLesson} className="text-white">
           <X size={24} />
@@ -74,14 +105,20 @@ const LessonInterface: React.FC = () => {
             style={{width: `${(currentQuestionIndex / questions.length) * 100}%`}}
           ></div>
         </div>
-        <div className="flex">
+        <div className="flex space-x-1">
           {[...Array(5)].map((_, i) => (
-            <span key={i} className={i < hearts ? "text-red-500" : "text-gray-500"}>❤️</span>
+            <Heart
+              key={i}
+              size={24}
+              fill={i < hearts ? "#ff4b4b" : "none"}
+              stroke={i < hearts ? "#ff4b4b" : "#4b4b4b"}
+            />
           ))}
         </div>
       </div>
+
       <div className="flex-grow flex flex-col items-center justify-center p-4">
-        <h2 className="text-2xl font-bold mb-8">Write this in English</h2>
+        <h2 className="text-2xl font-bold mb-8">Translate this sentence</h2>
         <div className="flex items-center mb-8">
           <img 
             src="/api/placeholder/80/80" 

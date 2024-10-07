@@ -17,12 +17,18 @@ export const LessonProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [hearts, setHearts] = useState(5);
 
-  const startLesson = () => setIsLessonStarted(true);
+  const startLesson = () => {
+    setIsLessonStarted(true);
+    setHearts(5);
+    setCurrentQuestionIndex(0);
+  };
+
   const exitLesson = () => {
     setIsLessonStarted(false);
     setCurrentQuestionIndex(0);
     setHearts(5);
   };
+
   const nextQuestion = () => setCurrentQuestionIndex(prev => prev + 1);
 
   return (
